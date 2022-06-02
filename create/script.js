@@ -10,40 +10,51 @@ should be black
 */
 
 let articleAdd = document.querySelector("article");
-let learner = ["Dylan", "Anais", "Dorian", "Henri", "Kevin", "Arthur", "Nicolas","Latifa", "Marlène", "Louis", "Duc", "Lydia", "Mariya", "Melih", "Mehdi", "Olivier", "Miguel", "Quentin", "Semih", "Tanguy", "Antoine", "Sébastien"];
+const learner = ["Dylan", "Anais", "Dorian", "Henri", "Kevin", "Arthur", "Nicolas","Latifa", "Marlène", "Louis", "Duc", "Lydia", "Mariya", "Melih", "Mehdi", "Olivier", "Miguel", "Quentin", "Semih", "Tanguy", "Antoine", "Sébastien"];
 let colorRgb = [];
 
 function randomColor() {
     return '#' + ('00000' + (Math.random() * 16777216 << 0).toString(16)).substr(-6);
 }
 
-for(let i = 0; i < learner.length; i++){
+/* ------point 3------------------------------------------------------------------*/
 
-let newSection = document.createElement("section");
-newSection.setAttribute("style", "background-color: " + randomColor() + ";");
-let newP = document.createElement("p");
-let newContent = document.createTextNode(learner[i]);
-newP.appendChild(newContent);
-newSection.appendChild(newP);
-articleAdd.appendChild(newSection);
+let l = learner.length, k , temp;
+   while(--l > 0){
+      k = Math.floor(Math.random() * (l+1));
+      temp = learner[k];
+      learner[k] = learner[l];
+      learner[l] = temp;
+   }
 
 /* -------------------------------------------------------------------------------*/
 
-let sectionColor = window.getComputedStyle(newSection).backgroundColor;
-colorRgb.push(sectionColor);
-let colorNb = colorRgb[i].match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-colorNb = colorNb.join("");
+for(let i = 0; i < learner.length; i++){
 
-console.log(sectionColor);
-console.log(colorRgb);
-/*console.log(colorNb);*/
+   
+    
+    colorRgb = [];
 
-let setContrast = rgb =>
-    (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000 > 125 ? 'black' : 'white'
+    let newSection = document.createElement("section");
+    newSection.setAttribute("style", "background-color: " + randomColor() + ";");
+    let newP = document.createElement("p");
+    let newContent = document.createTextNode(learner[i]);
+    newP.appendChild(newContent);
+    newSection.appendChild(newP);
+    articleAdd.appendChild(newSection);
 
-let getCorrectColor = setContrast(sectionColor);
+/* -------------------------------------------------------------------------------*/
 
-console.log(getCorrectColor);
+    let sectionColor = window.getComputedStyle(newSection).backgroundColor;
+    colorRgb.push(...sectionColor.match(/\d+/g));
+    let r = parseInt(colorRgb[0]);
+    let g = parseInt(colorRgb[1]);
+    let b = parseInt(colorRgb[2]);
+
+    if (((r * 299) / 1000) + ((g * 587) / 1000) + ((b * 114) / 1000) > 186) {
+        newP.setAttribute("style", "color: black;");
+    } else {
+        newP.setAttribute("style", "color: white;");
+    }
+
 }
-
-
