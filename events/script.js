@@ -93,5 +93,5 @@ document.addEventListener('keydown', event => {
       const deleteSqr = document.querySelector('.displayedsquare')
       deleteSqr.remove();
     }
-    }
+    
 })
