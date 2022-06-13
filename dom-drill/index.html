@@ -62,18 +62,6 @@
             using element.style.visibility = 'hidden')
     */
     
-
-    /*const ulChild = selectUl.childNodes
-    for(let i = 0; i < ulChild.length; i++){
-
-        if(ulChild[i].innerText == "Fast and Furious"){
-
-            ulChild[i].setAttribute('class', 'important')
-            selectUl.prepend(ulChild[i])
-            
-        }
-       
-    }*/
     
     const selectUl = document.querySelector('ul')
     const selectLis = document.querySelectorAll('li')
@@ -104,6 +92,21 @@
     const selectOption = document.querySelector('option')
     const selectSelect = document.querySelector('select')
 
+
+    /*document.addEventListener('keyup', event => {
+            if (event.which === 82) {
+                
+                for(var i =selectLis.length-1 ; i>0 ;i--){
+                    var j = Math.floor( Math.random() * (i + 1) );
+                    [selectLis[i],selectLis[j]]=[selectLis[j],selectLis[i]];
+                }
+
+                console.log(selectLis)
+                
+            }
+        })*/
+
+
     for (let selectLi of selectLis) {
 
         if(selectLi.innerText == "Fast and Furious"){
@@ -112,6 +115,7 @@
             selectUl.prepend(selectLi)
 
         }
+
         function liClick(){
 
             if(selectLi.innerText == "Fast and Furious"){
@@ -121,12 +125,11 @@
             }
         }
 
-            selectLi.addEventListener('click', liClick)
+        selectLi.addEventListener('click', liClick)
         
-            
+        const selectImp = document.querySelector('.important')
 
-            const selectImp = document.querySelector('.important')
-            function selectImportant(){
+        function selectImportant(){
                     if(selectSelect.value == 'imp'){
                         selectLi.style.visibility = 'hidden'
                         selectImp.style.visibility = 'visible'    
@@ -135,9 +138,27 @@
                         selectImp.style.visibility = 'hidden'
                     }
                 }
-            selectSelect.addEventListener('change', selectImportant)
+
+        selectSelect.addEventListener('change', selectImportant)
+
+
+
+        for(let i = 0; i < selectLis.length; i++){
+                
+                    if(selectLi.isEqualNode(selectLis[i]) && selectLi != selectLis[i]){
+
+                        selectLi.firstChild.remove()
+                    }
+
+                    if(selectLi.innerText == ""){
+                        selectLi.remove()
+                    }   
+
+        }
 
     }
+    
+    
 
     
          
