@@ -92,20 +92,23 @@
     const selectOption = document.querySelector('option')
     const selectSelect = document.querySelector('select')
 
-
-    /*document.addEventListener('keyup', event => {
-            if (event.which === 82) {
-                
-                for(var i =selectLis.length-1 ; i>0 ;i--){
-                    var j = Math.floor( Math.random() * (i + 1) );
-                    [selectLis[i],selectLis[j]]=[selectLis[j],selectLis[i]];
+    document.addEventListener('keyup', event => {
+                if (event.which === 82) {
+                    
+                    for (let i = selectUl.children.length; i >= 0; i--) {
+                        selectUl.appendChild(selectUl.children[Math.random() * i | 1]);
+                    }
+                    
                 }
-
-                console.log(selectLis)
                 
-            }
-        })*/
-
+                if (event.which === 68) {
+                    
+                    const selectImp = document.querySelector('.important')
+                    let fafClone = selectImp.cloneNode(true)
+                    selectUl.prepend(fafClone)
+                    
+                }
+        })
 
     for (let selectLi of selectLis) {
 
@@ -137,6 +140,9 @@
                         selectLi.style.visibility = 'visible'
                         selectImp.style.visibility = 'hidden'
                     }
+                    else{
+                        selectLi.style.visibility = 'visible'
+                    }
                 }
 
         selectSelect.addEventListener('change', selectImportant)
@@ -156,12 +162,8 @@
 
         }
 
-    }
-    
-    
-
-    
-         
+        
+    }   
 
   </script>
 </body>
